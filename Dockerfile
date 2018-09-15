@@ -1,5 +1,4 @@
 FROM node:8.12.0-stretch
-#FROM fkfk/node:xenial-9.3.0
 
 # install dependency package
 RUN set -x \
