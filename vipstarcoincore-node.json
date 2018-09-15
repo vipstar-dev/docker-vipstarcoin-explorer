@@ -1,5 +1,5 @@
 {
-  "network": "mainnet",
+  "network": "testnet",
   "port": 3001,
   "services": [
     "vipstarcoin-api",
@@ -25,7 +25,7 @@
       "db": {
         "host": "mongo",
         "port": "27017",
-        "database": "vipstarcoin-explorer-mainnet",
+        "database": "vipstarcoin-explorer-testnet",
         "user": "",
         "password": ""
       },
