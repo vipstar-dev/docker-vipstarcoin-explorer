@@ -23,7 +23,7 @@ WORKDIR /root
 RUN vipstarcoincore-node create explorer
 
 WORKDIR /root/explorer
-RUN vipstarcoincore-node install https://github.com/fkfk/vipstarcoin-api/tarball/82db698
+RUN vipstarcoincore-node install https://github.com/fkfk/vipstarcoin-api/tarball/ff2b196
 RUN vipstarcoincore-node install https://github.com/fkfk/vipstarcoin-explorer/tarball/d3ab20a
 
 COPY vipstarcoincore-node.json /root/explorer/vipstarcoincore-node.json
