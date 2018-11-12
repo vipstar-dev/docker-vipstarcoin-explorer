@@ -1,0 +1,88 @@
+#!/bin/sh
+
+testnet=${TESTNET:=0}
+port=${COIND_PORT:=31915}
+uacomment=${UACOMMENT:="bitcore"}
+dbcache=${DBCACHE:=2048}
+checkblocks=${CHECKBLOCKS:=144}
+maxuploadtarget=${MAXUPLOADTARGET:=1024}
+rpcworkqueue=${RPCWORKQUEUE:=16}
+maxconnections=${MAXCONNECTIONS:=125}
+
+network=${NETWORK:="mainnet"}
+api_prefix=${API_PREFIX:="api"}
+mongo_host=${MONGO_HOST:="mongo"}
+mongo_port=${MONGO_PORT:=27017}
+mongo_dbname=${MONGO_DBNAME:="vipstarcoin-explorer-mainnet"}
+mongo_user=${MONGO_USER}
+mongo_password=${MONGO_PASSWORD}
+
+# generate VIPSTARCOIN.conf
+cat << _EOS > /data/explorer/VIPSTARCOIN.conf
+server=1
+rest=1
+whitelist=127.0.0.1
+txindex=1
+addressindex=1
+timestampindex=1
+spentindex=1
+addrindex=1
+logevents=1
+testnet=${testnet}
+port=${port}
+zmqpubrawtx=tcp://127.0.0.1:28332
+zmqpubhashblock=tcp://127.0.0.1:28332
+rpcallowip=127.0.0.1
+rpcuser=vipstarcoin
+rpcpassword=vipstarcoinpassword
+rpcport=31916
+uacomment=${uacomment}
+dbcache=${dbcache}
+checkblocks=${checkblocks}
+maxuploadtarget=${maxuploadtarget}
+rpcworkqueue=${rpcworkqueue}
+maxconnections=${maxconnections}
+_EOS
+
+# generate vipstarcoincore-node.json
+cat << _EOS > /data/explorer/vipstarcoincore-node.json
+{
+  "network": "${network}",
+  "port": 3001,
+  "services": [
+    "vipstarcoin-api",
+    "vipstarcoin-explorer",
+    "vipstarcoind",
+    "web"
+  ],
+  "servicesConfig": {
+    "vipstarcoind": {
+      "spawn": {
+        "configdir": "/data/explorer",
+        "datadir": "/data/explorer/data",
+        "exec": "/usr/local/lib/node_modules/vipstarcoincore-node/bin/VIPSTARCOINd"
+      }
+    },
+    "vipstarcoin-explorer": {
+      "apiPrefix": "${api_prefix}",
+      "routePrefix": "",
+      "nodemapLink": ""
+    },
+    "vipstarcoin-api": {
+      "routePrefix": "${api_prefix}",
+      "db": {
+        "host": "${mongo_host}",
+        "port": "${mongo_port}",
+        "database": "${mongo_dbname}",
+        "user": "${mongo_user}",
+        "password": "${mongo_password}"
+      },
+      "erc20": {
+        "updateFromBlockHeight": 0
+      }
+    }
+  }
+}
+_EOS
+
+/usr/local/lib/node_modules/vipstarcoincore-node/bin/vipstarcoincore-node start

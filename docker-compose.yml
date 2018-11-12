@@ -1,0 +1,37 @@
+version: '2'
+services:
+  explorer:
+    build: ./explorer
+    restart: always
+    ports:
+      - "3001:3001"
+      - "31939:31935"
+    volumes:
+      - ./data/explorer:/data/explorer/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+    links:
+      - mongo
+    environment:
+      TESTNET: 1
+      DBCACHE: 2048
+      CHECKBLOCKS: 144
+      MAXUPLOADTARGET: 1024
+      RPCWORKQUEUE: 16
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+  mongo:
+    image: mongo:3.6
+    restart: always
+    expose:
+      - "27017"
+    volumes:
+      - ./data/mongo:/data/db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
