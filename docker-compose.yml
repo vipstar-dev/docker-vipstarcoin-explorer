@@ -16,7 +16,7 @@ services:
     links:
       - mongo
     environment:
-      TESTNET: 1
+      TESTNET: 0
       DBCACHE: 2048
       CHECKBLOCKS: 144
       MAXUPLOADTARGET: 1024
