@@ -1,4 +1,4 @@
-FROM node:8.12.0-stretch
+FROM node:8.15.0-stretch-slim
 
 # install dependency package
 RUN set -x \
