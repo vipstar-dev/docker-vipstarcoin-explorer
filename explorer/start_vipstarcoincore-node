@@ -60,7 +60,7 @@ cat << _EOS > /data/explorer/vipstarcoincore-node.json
       "spawn": {
         "configdir": "/data/explorer",
         "datadir": "/data/explorer/data",
-        "exec": "/usr/local/lib/node_modules/vipstarcoincore-node/bin/VIPSTARCOINd"
+        "exec": "/usr/local/lib/node_modules/vipstarcoincore-node/bin/vipstarcoind"
       }
     },
     "vipstarcoin-explorer": {
