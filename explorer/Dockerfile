@@ -27,7 +27,7 @@ WORKDIR /data
 RUN vipstarcoincore-node create explorer
 
 WORKDIR /data/explorer
-RUN vipstarcoincore-node install https://github.com/vipstar-dev/vipstarcoin-api/tarball/6f6c4a9
+RUN vipstarcoincore-node install https://github.com/vips-wallet/vipstarcoin-api/tarball/2deb6fd
 RUN vipstarcoincore-node install https://github.com/vips-wallet/vipstarcoin-explorer/tarball/d3ab20a
 
 COPY start_vipstarcoincore-node /usr/local/bin/start_vipstarcoincore-node
