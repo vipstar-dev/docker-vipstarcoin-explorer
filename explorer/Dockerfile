@@ -19,7 +19,7 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
 # install vipstarcoin-explorer
 RUN npm install --unsafe-perm -g https://github.com/vipstar-dev/vipstarcoincore-node/tarball/6d10abc \
  && /usr/local/lib/node_modules/vipstarcoincore-node/scripts/download \
- && rm /usr/local/lib/node_modules/vipstarcoincore-node/bin/VIPSTARCOIN-1.2.3-x86_64-linux-gnu.tar.gz
+ && rm /usr/local/lib/node_modules/vipstarcoincore-node/VIPSTARCOIN-1.2.3-x86_64-linux-gnu.tar.gz
 COPY 01-coind-data-dir /etc/fix-attrs.d/01-coind-data-dir
 RUN mkdir /data
 
